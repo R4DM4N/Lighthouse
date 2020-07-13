@@ -4,6 +4,8 @@
 CRGB leds[NUM_LEDS];
 LEDAnimationString LEDAnimationStrings[NUM_ANIMATION_STRINGS];
 int animationDelay = 0;
+int candles[] = {0, 1, 18, 19};
+int candleTimer[2];
 
 void LEDAnimation(LEDAnimationString *LEDString){
   LEDString->ledStringArray[LEDString->currentLED] = CHSV(0,0,MAX_BRIGHTNESS);
@@ -23,18 +25,33 @@ void fadedown() {
   }
 }
 
+void candleAnimation(){
+  for (int i = 0; i < NUM_CANDLES; i++){
+      candleTimer[i]--;
+      if (candleTimer[i] == 0){
+        candleTimer[i] = random8(125, 255);
+        leds[candles[i]] = CHSV(25,255, random8(150, 255));
+      }
+  }
+}
+
 void setup(){
   FastLED.addLeds<LEDTYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS);
-  LEDAnimationStrings[0].ledStringArray = leds;
-  LEDAnimationStrings[1].ledStringArray = leds + 20;
+  LEDAnimationStrings[0].ledStringArray = leds + 2;
+  //LEDAnimationStrings[1].ledStringArray = leds + 20;
+
+  for (int i = 0; i < NUM_CANDLES; i++){
+    candleTimer[i] = random8(105, 255);
+  }
 }
 
 void loop()
 {
-  fadedown();
   LEDAnimation(&LEDAnimationStrings[0]);
-  LEDAnimation(&LEDAnimationStrings[1]);
+ // LEDAnimation(&LEDAnimationStrings[1]);
+  candleAnimation();
   FastLED.show();
   if (animationDelay == 150) animationDelay = 0;
   animationDelay++;
+  fadedown();
 }
