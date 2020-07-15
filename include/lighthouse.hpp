@@ -24,6 +24,6 @@ typedef struct {
   CRGB *ledStringArray;
 } LEDAnimationString;
 
-void fadeDown(uint8_t, CRGB *, int);
+void fadeDown(uint8_t, int, int);
 
 void LEDAnimation(LEDAnimationString*);

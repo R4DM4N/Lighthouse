@@ -18,12 +18,12 @@ void LEDAnimation(LEDAnimationString *LEDString){
   if (animationDelay == 150){
     LEDString->currentLED = (LEDString->currentLED + 1) % LEDString->num_leds;
   }
-  fadeDown(254, LEDString->ledStringArray, LEDString->num_leds);
+  fadeDown(254, 0, LEDString->num_leds);
 }
 
-void fadeDown(uint8_t fadeFactor, CRGB *fadeLEDS, int nLEDS) { 
-  for (int i = 0; i < nLEDS; i++){
-    fadeLEDS[i].nscale8(fadeFactor);
+void fadeDown(uint8_t fadeFactor, int LEDPosition, int nLEDs) { 
+  for (int i = LEDPosition; i < nLEDs + LEDPosition; i++){
+    leds[i].nscale8(fadeFactor);
   }
 }
 
