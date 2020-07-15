@@ -18,7 +18,7 @@ void LEDAnimation(LEDAnimationString *LEDString){
   if (animationDelay == 150){
     LEDString->currentLED = (LEDString->currentLED + 1) % LEDString->num_leds;
   }
-  fadeDown(254, 0, LEDString->num_leds);
+  fadeDown(LEDString->fadeFactor, LEDString->LEDOffset, LEDString->num_leds);
 }
 
 void fadeDown(uint8_t fadeFactor, int LEDPosition, int nLEDs) { 
@@ -35,13 +35,18 @@ void candleAnimation(){
         leds[candles[i]] = CHSV(25,255, random8(150, 255));
       }
   }
-  fadeDown(200, &leds[16], 4);
+  fadeDown(200, 16, 4);
 }
 
 void setup(){
   FastLED.addLeds<LEDTYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS);
+
   LEDAnimationStrings[0].ledStringArray = leds ;
+  LEDAnimationStrings[0].LEDOffset = 0;
+
   LEDAnimationStrings[1].ledStringArray = leds + 20;
+  LEDAnimationStrings[1].LEDOffset = 20;
+  LEDAnimationStrings[1].fadeFactor = 253;
 
   for (int i = 0; i < NUM_CANDLES; i++){
     candleTimer[i] = random8(105, 255);

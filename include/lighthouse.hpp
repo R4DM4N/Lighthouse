@@ -21,7 +21,9 @@ extern "C" {
 typedef struct {
   uint8_t currentLED = 0;
   int num_leds = 16;
+  int LEDOffset;
   CRGB *ledStringArray;
+  int fadeFactor = 254;
 } LEDAnimationString;
 
 void fadeDown(uint8_t, int, int);
