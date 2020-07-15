@@ -32,7 +32,7 @@ void candleAnimation(){
       candleTimer[i]--;
       if (candleTimer[i] == 0){
         candleTimer[i] = random8(125, 255);
-        leds[candles[i]] = CHSV(25,255, random8(150, 255));
+        leds[candles[i]] = CHSV(0,0, random8(150, 255));
       }
   }
   fadeDown(CANDLE_FADE_FACTOR, 16, 4);
