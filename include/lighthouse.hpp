@@ -23,7 +23,7 @@ typedef struct {
   int num_leds = 16;
   int LEDOffset;
   CRGB *ledStringArray;
-  int fadeFactor = 254;
+  int fadeFactor = FADE_FACTOR;
 } LEDAnimationString;
 
 void fadeDown(uint8_t, int, int);
