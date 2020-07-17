@@ -14,14 +14,8 @@
 
 #if !defined(__UNO__)
 extern "C" { 
- // int __cxa_guard_acquire(__guard g) {return !(char )(g);};
- // void __cxa_guard_release (__guard *g) {(char *)g = 1;};
   volatile unsigned long timer0_millis = 0;
 };
-#endif
-
-#if defined(UNO)
-  #warning "UNO defined"
 #endif
 
 typedef struct {
